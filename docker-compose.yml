@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/sksaude
+      - SPRING_DATASOURCE_USERNAME=sksaudes
+      - SPRING_DATASOURCE_PASSWORD=sksaudes
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: sksaudes
+      POSTGRES_PASSWORD: sksaudes
+      POSTGRES_DB: sksaude
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    depends_on:
+      - db
+    ports:
+      - "8081:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: luizfelipealvesdesouza706@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: Luiz1992@
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+
+volumes:
+  postgres-data:
+    driver: local
+  pgadmin:
+    driver: local
