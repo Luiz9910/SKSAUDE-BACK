@@ -1,8 +1,8 @@
-version: '3.8'
-
+version: '3'
 services:
   app:
     build: .
+    restart: always
     ports:
       - "8080:8080"
     environment:
@@ -14,29 +14,30 @@ services:
 
   db:
     image: postgres:15
+    restart: always
     environment:
-      POSTGRES_USER: sksaudes
-      POSTGRES_PASSWORD: sksaudes
+      POSTGRES_USER: sksaude
+      POSTGRES_PASSWORD: sksaude123
       POSTGRES_DB: sksaude
     ports:
       - "5432:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
+      - ./initdb.sql:/docker-entrypoint-initdb.d/initdb.sql
 
   pgadmin:
     image: dpage/pgadmin4:latest
+    restart: always
     depends_on:
       - db
     ports:
       - "8081:80"
     environment:
-      PGADMIN_DEFAULT_EMAIL: luizfelipealvesdesouza706@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: Luiz1992@
+      PGADMIN_DEFAULT_EMAIL: admin@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: admin
     volumes:
-      - pgadmin:/var/lib/pgadmin
+      - pgadmin-data:/var/lib/pgadmin
 
 volumes:
   postgres-data:
-    driver: local
-  pgadmin:
-    driver: local
+  pgadmin-data:
