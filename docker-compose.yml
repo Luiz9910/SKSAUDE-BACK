@@ -7,8 +7,8 @@ services:
       - "8080:8080"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/sksaude
-      - SPRING_DATASOURCE_USERNAME=sksaudes
-      - SPRING_DATASOURCE_PASSWORD=sksaudes
+      - SPRING_DATASOURCE_USERNAME=sksaude
+      - SPRING_DATASOURCE_PASSWORD=sksaude123
     depends_on:
       - db
 
