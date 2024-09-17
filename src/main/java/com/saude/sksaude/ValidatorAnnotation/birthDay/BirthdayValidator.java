@@ -16,7 +16,11 @@ public class BirthdayValidator implements ConstraintValidator<ValidBirthday, Loc
         if (value == null) {
             return true;
         }
-        LocalDateTime minDate = LocalDateTime.of(1910, 1, 1, 0, 0);
-        return !value.isBefore(minDate);
+
+        LocalDateTime minDate = LocalDateTime.of(1910, 1, 1, 0, 0); // Data mínima
+        LocalDateTime now = LocalDateTime.now();
+
+        return !value.isBefore(minDate) && !value.isAfter(now);
     }
+
 }

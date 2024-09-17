@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = BirthdayValidator.class)
 public @interface ValidBirthday {
-    String message() default "Data de nascimento deve ser posterior a 1910-01-01";
+    String message() default "Data de nascimento inválida";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

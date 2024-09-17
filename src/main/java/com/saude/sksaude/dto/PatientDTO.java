@@ -66,4 +66,14 @@ public class PatientDTO {
     @Pattern(regexp = "^(A|B|AB|O)[+-]$", message = "Tipo sanguíneo deve ser 'A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+' ou 'AB-'. Ex: A+")
     @Schema(description = "Patient's blood type", example = "A+", required = true)
     private String tpBlood;
+
+    public void toUpperCase() {
+         nmPatient = nmPatient.toUpperCase();
+         nrPhone = nrPhone.toUpperCase();
+         nrCpf = nrCpf.toUpperCase();
+         tpSex = tpSex.toUpperCase();
+         tpMaritalStatus = tpMaritalStatus.toUpperCase();
+         tpSkinColor = tpSkinColor.toUpperCase();
+         tpBlood = tpBlood.toUpperCase();
+    }
 }
