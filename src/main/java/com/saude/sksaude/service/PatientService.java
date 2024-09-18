@@ -3,6 +3,8 @@ package com.saude.sksaude.service;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.saude.sksaude.dto.PatientDTO;
+import com.saude.sksaude.exception.BadRequestException;
+import com.saude.sksaude.exception.NotFoundException;
 import com.saude.sksaude.model.Patient;
 import com.saude.sksaude.repository.PatientRepository;
 import com.saude.sksaude.utils.DefaultValuePatient;
@@ -22,6 +24,10 @@ public class PatientService {
     private final PatientRepository patientRepository;
 
     public Patient savePatient(PatientDTO patientDTO) {
+        if (patientRepository.findByNrCpf(patientDTO.getNrCpf()) != null) {
+            throw new BadRequestException("Paciente existe no sistema");
+        }
+
         patientDTO.toUpperCase();
         Patient patient = mapper.map(patientDTO, Patient.class);
         patient.setSnActive(DefaultValuePatient.snActive);
