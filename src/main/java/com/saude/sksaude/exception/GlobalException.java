@@ -35,15 +35,22 @@ public class GlobalException {
     }
 
     @ExceptionHandler(BadRequestException.class)
-//  @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiErrorMessage handleBadRequestException(BadRequestException e, HttpServletRequest request) {
         String messageError = e.getMessage();
         return new ApiErrorMessage(Instant.now(), "Ocorreu um erro", messageError, request.getRequestURI());
     }
 
     @ExceptionHandler(NotFoundException.class)
-//  @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ApiErrorMessage handleNotFoundException(BadRequestException e, HttpServletRequest request) {
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiErrorMessage handleNotFoundException(NotFoundException e, HttpServletRequest request) {
+        String messageError = e.getMessage();
+        return new ApiErrorMessage(Instant.now(), "Ocorreu um erro", messageError, request.getRequestURI());
+    }
+
+    @ExceptionHandler(ConflictException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ApiErrorMessage handleConflictException(ConflictException e, HttpServletRequest request) {
         String messageError = e.getMessage();
         return new ApiErrorMessage(Instant.now(), "Ocorreu um erro", messageError, request.getRequestURI());
     }

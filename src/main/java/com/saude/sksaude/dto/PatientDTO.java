@@ -36,8 +36,8 @@ public class PatientDTO {
     private LocalDateTime dtBirthday;
 
     @CPF
-    @NotBlank(message = "Número do CPF precisa ser informado! Ex: 13834119482")
-    @Schema(description = "Patient's CPF (Brazilian individual taxpayer registry number)", example = "13834119482", required = true)
+    @NotBlank(message = "Número do CPF precisa ser informado! Ex: 97002046004")
+    @Schema(description = "Patient's CPF (Brazilian individual taxpayer registry number)", example = "97002046004", required = true)
     private String nrCpf;
 
     @NotBlank(message = "Sexo precisa ser informado! Ex: M (Masculino), F (Feminino) ou I (Indeterminado)")
@@ -69,8 +69,6 @@ public class PatientDTO {
 
     public void toUpperCase() {
          nmPatient = nmPatient.toUpperCase();
-         nrPhone = nrPhone.toUpperCase();
-         nrCpf = nrCpf.toUpperCase();
          tpSex = tpSex.toUpperCase();
          tpMaritalStatus = tpMaritalStatus.toUpperCase();
          tpSkinColor = tpSkinColor.toUpperCase();

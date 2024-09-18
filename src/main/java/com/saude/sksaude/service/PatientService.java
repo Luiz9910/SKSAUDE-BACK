@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.saude.sksaude.dto.PatientDTO;
 import com.saude.sksaude.exception.BadRequestException;
+import com.saude.sksaude.exception.ConflictException;
 import com.saude.sksaude.exception.NotFoundException;
 import com.saude.sksaude.model.Patient;
 import com.saude.sksaude.repository.PatientRepository;
@@ -25,7 +26,7 @@ public class PatientService {
 
     public Patient savePatient(PatientDTO patientDTO) {
         if (patientRepository.findByNrCpf(patientDTO.getNrCpf()) != null) {
-            throw new BadRequestException("Paciente existe no sistema");
+            throw new ConflictException("Já existe esse paciente no sistema");
         }
 
         patientDTO.toUpperCase();
