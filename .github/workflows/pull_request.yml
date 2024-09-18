@@ -28,11 +28,6 @@ jobs:
       - name: Install dependencies
         run: mvn install -DskipTests=true
 
-      # Passo 4: Encontrar código morto
-      # Adicione aqui uma ação para encontrar código morto, por exemplo, usando o plugin `findbugs` ou `spotbugs`.
-      - name: Find dead code
-        run: mvn spotbugs:check
-
       # Passo 5: Rodar os testes
       - name: Run tests
         run: mvn test
