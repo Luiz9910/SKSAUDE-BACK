@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class PacienteController {
     @GetMapping
     public String getPaciente() {
-        return "marcelo";
+        return "marcelo luiz";
     }
 }
