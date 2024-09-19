@@ -11,6 +11,8 @@ services:
       - SPRING_DATASOURCE_PASSWORD=sksaude123
     depends_on:
       - db
+    networks:
+      - app-network
 
   db:
     image: postgres:15
@@ -23,7 +25,9 @@ services:
       - "5432:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
-      - ./initdb.sql:/docker-entrypoint-initdb.d/initdb.sql
+      -
+    networks:
+      - app-network
 
   pgadmin:
     image: dpage/pgadmin4:latest
@@ -37,7 +41,13 @@ services:
       PGADMIN_DEFAULT_PASSWORD: admin
     volumes:
       - pgadmin-data:/var/lib/pgadmin
+    networks:
+      - app-network
 
 volumes:
   postgres-data:
   pgadmin-data:
+
+networks:
+  app-network:
+
