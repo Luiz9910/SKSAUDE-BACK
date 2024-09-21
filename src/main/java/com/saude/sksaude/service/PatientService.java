@@ -6,7 +6,6 @@ import com.saude.sksaude.dto.PatientDTO;
 import com.saude.sksaude.dto.PatientUpdateDTO;
 import com.saude.sksaude.exception.BadRequestException;
 import com.saude.sksaude.exception.ConflictException;
-import com.saude.sksaude.exception.NotFoundException;
 import com.saude.sksaude.model.Patient;
 import com.saude.sksaude.repository.PatientRepository;
 import com.saude.sksaude.utils.DefaultValuePatient;
@@ -16,13 +15,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.concurrent.CompletableFuture;
-
 
 @RequiredArgsConstructor
 @Service
 public class PatientService {
-    private ModelMapper mapper = new ModelMapper();
+    private final ModelMapper mapper = new ModelMapper();
 
 
     private final PatientRepository patientRepository;

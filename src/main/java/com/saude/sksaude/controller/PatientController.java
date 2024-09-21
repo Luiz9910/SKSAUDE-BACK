@@ -27,14 +27,14 @@ public class PatientController {
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("{nrCpf}")
-    public PatientResponse updatePatient(@PathVariable(value = "nrCpf", required = true) String nrCpf, @RequestBody @Valid PatientUpdateDTO patientUpdateDTO) {
+    public PatientResponse updatePatient(@PathVariable(value = "nrCpf") String nrCpf, @RequestBody @Valid PatientUpdateDTO patientUpdateDTO) {
         return new PatientResponse("Dados do paciente atualizado com suceso.",
                 this.patientService.updatePatient(nrCpf, patientUpdateDTO));
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PatchMapping("action/")
-    public PatientResponse actionsPatient (@RequestParam(name = "nrCpf", required = true) String nrCpf, @RequestParam("action") String action) {
+    public PatientResponse actionsPatient (@RequestParam(name = "nrCpf") String nrCpf, @RequestParam("action") String action) {
         return new PatientResponse("Ação para ativar ou inativar o paciente foi realizada com sucesso.",
                 this.patientService.actionsPatient(nrCpf, action));
     }
