@@ -3,12 +3,14 @@ package com.saude.sksaude.service;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.saude.sksaude.dto.PatientDTO;
+import com.saude.sksaude.dto.PatientUpdateDTO;
 import com.saude.sksaude.exception.BadRequestException;
 import com.saude.sksaude.exception.ConflictException;
 import com.saude.sksaude.exception.NotFoundException;
 import com.saude.sksaude.model.Patient;
 import com.saude.sksaude.repository.PatientRepository;
 import com.saude.sksaude.utils.DefaultValuePatient;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -62,10 +64,7 @@ public class PatientService {
             throw new BadRequestException("Ação inválida: " + action + ". Deve ser 'S' ou 'N'.");
         }
 
-        Patient patient = patientRepository.findPatientByNrCpf(nrCpf);
-        if (patient == null) {
-            throw new ConflictException("Paciente não foi encontrado no sistema");
-        }
+        Patient patient = this.findPatientByNrCpf(nrCpf);
 
         if (action.trim().equals(patient.getSnActive())) {
             throw new ConflictException("O paciente está " + patient.getSnActive() + " no sistema. Altere a ação (S ou N) para a gente trocar no sistema");
@@ -73,5 +72,65 @@ public class PatientService {
 
         patient.setSnActive(action);
         return patientRepository.save(patient);
+    }
+
+    public Patient updatePatient(String nrCpf, @Valid PatientUpdateDTO patientUpdateDTO) {
+        Patient existingPatient = this.findPatientByNrCpf(nrCpf);
+        patientUpdateDTO.toUpperCase();
+        existingPatient = this.setPatientUpdate(patientUpdateDTO, existingPatient);
+        return patientRepository.save(existingPatient);
+    }
+
+    public Patient findPatientByNrCpf(String nrCpf) {
+        Patient patient = patientRepository.findPatientByNrCpf(nrCpf.replaceAll("[^0-9]", ""));
+        if (patient == null) {
+            throw new ConflictException("Paciente não foi encontrado no sistema");
+        }
+
+        return patient;
+    }
+
+    public Patient setPatientUpdate(PatientUpdateDTO patientUpdateDTO, Patient existingPatient) {
+        if (patientUpdateDTO.getNmPatient() != null) {
+            existingPatient.setNmPatient(patientUpdateDTO.getNmPatient());
+        }
+
+        if (patientUpdateDTO.getEmail() != null) {
+            existingPatient.setEmail(patientUpdateDTO.getEmail());
+        }
+
+        if (patientUpdateDTO.getNrPhone() != null) {
+            existingPatient.setNrPhone(patientUpdateDTO.getNrPhone());
+        }
+
+        if (patientUpdateDTO.getDtBirthday() != null) {
+            existingPatient.setDtBirthday(patientUpdateDTO.getDtBirthday());
+        }
+
+        if (patientUpdateDTO.getTpSex() != null) {
+            existingPatient.setTpSex(patientUpdateDTO.getTpSex());
+        }
+
+        if (patientUpdateDTO.getTpMaritalStatus() != null) {
+            existingPatient.setTpMaritalStatus(patientUpdateDTO.getTpMaritalStatus());
+        }
+
+        if (patientUpdateDTO.getNrCep() != null) {
+            existingPatient.setNrCep(String.valueOf(patientUpdateDTO.getNrCep()));
+        }
+
+        if (patientUpdateDTO.getDsAddress() != null) {
+            existingPatient.setDsAddress(patientUpdateDTO.getDsAddress());
+        }
+
+        if (patientUpdateDTO.getTpSkinColor() != null) {
+            existingPatient.setTpSkinColor(patientUpdateDTO.getTpSkinColor());
+        }
+
+        if (patientUpdateDTO.getTpBlood() != null) {
+            existingPatient.setTpBlood(patientUpdateDTO.getTpBlood());
+        }
+
+        return existingPatient;
     }
 }
