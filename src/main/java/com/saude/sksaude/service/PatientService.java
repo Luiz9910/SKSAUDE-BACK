@@ -3,6 +3,7 @@ package com.saude.sksaude.service;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.saude.sksaude.dto.PatientDTO;
+import com.saude.sksaude.dto.PatientResponse;
 import com.saude.sksaude.dto.PatientUpdateDTO;
 import com.saude.sksaude.exception.BadRequestException;
 import com.saude.sksaude.exception.ConflictException;
@@ -55,7 +56,15 @@ public class PatientService {
         }
     }
 
+    public Patient getPatientByNrCpf(String nrCpf) {
+        return this.findPatientByNrCpf(nrCpf);
+    }
+
     public Patient actionsPatient(String nrCpf, String action) {
+        if (nrCpf == null || action == null) {
+            throw new BadRequestException("Parâmetros 'nrCpf' e 'action' são obrigatórios.");
+        }
+
         action = action.toUpperCase().trim();
         if (!action.equals("S") && !action.equals("N")) {
             throw new BadRequestException("Ação inválida: " + action + ". Deve ser 'S' ou 'N'.");

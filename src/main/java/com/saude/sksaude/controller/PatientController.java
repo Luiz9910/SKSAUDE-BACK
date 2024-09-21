@@ -26,6 +26,13 @@ public class PatientController {
     }
 
     @ResponseStatus(HttpStatus.OK)
+    @GetMapping("{nrCpf}")
+    public PatientResponse getPatientByNrCpf(@PathVariable(value = "nrCpf") String nrCpf) {
+        return new PatientResponse("Dados do paciente.",
+                this.patientService.getPatientByNrCpf(nrCpf));
+    }
+
+    @ResponseStatus(HttpStatus.OK)
     @PutMapping("{nrCpf}")
     public PatientResponse updatePatient(@PathVariable(value = "nrCpf") String nrCpf, @RequestBody @Valid PatientUpdateDTO patientUpdateDTO) {
         return new PatientResponse("Dados do paciente atualizado com suceso.",
