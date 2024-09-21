@@ -16,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.concurrent.CompletableFuture;
 
+
 @RequiredArgsConstructor
 @Service
 public class PatientService {
@@ -53,5 +54,24 @@ public class PatientService {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public Patient actionsPatient(String nrCpf, String action) {
+        action = action.toUpperCase().trim();
+        if (!action.equals("S") && !action.equals("N")) {
+            throw new BadRequestException("Ação inválida: " + action + ". Deve ser 'S' ou 'N'.");
+        }
+
+        Patient patient = patientRepository.findPatientByNrCpf(nrCpf);
+        if (patient == null) {
+            throw new ConflictException("Paciente não foi encontrado no sistema");
+        }
+
+        if (action.trim().equals(patient.getSnActive())) {
+            throw new ConflictException("O paciente está " + patient.getSnActive() + " no sistema. Altere a ação (S ou N) para a gente trocar no sistema");
+        }
+
+        patient.setSnActive(action);
+        return patientRepository.save(patient);
     }
 }

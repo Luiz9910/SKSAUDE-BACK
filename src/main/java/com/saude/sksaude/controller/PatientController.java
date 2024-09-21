@@ -23,4 +23,11 @@ public class PatientController {
         return new PatientResponse("Dados do paciente foi salvo com sucesso",
                 this.patientService.savePatient(patientDTO));
     }
+
+    @ResponseStatus(HttpStatus.OK)
+    @PatchMapping("action/")
+    public PatientResponse actionsPatient (@RequestParam("nrCpf") String nrCpf, @RequestParam("action") String action) {
+        return new PatientResponse("Ação para ativar ou inativar o paciente foi realizada com sucesso",
+                this.patientService.actionsPatient(nrCpf, action));
+    }
 }
