@@ -70,6 +70,7 @@ public class PatientDTO {
     public void toUpperCase() {
          nmPatient = nmPatient.toUpperCase();
          tpSex = tpSex.toUpperCase();
+         nrCpf = nrCpf.replaceAll("[^\\d]", "");;
          tpMaritalStatus = tpMaritalStatus.toUpperCase();
          tpSkinColor = tpSkinColor.toUpperCase();
          tpBlood = tpBlood.toUpperCase();
