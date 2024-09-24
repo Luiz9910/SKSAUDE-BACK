@@ -3,11 +3,11 @@ package com.saude.sksaude.service;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.saude.sksaude.dto.PatientDTO;
-import com.saude.sksaude.dto.PatientResponse;
 import com.saude.sksaude.dto.PatientUpdateDTO;
-import com.saude.sksaude.exception.BadRequestException;
-import com.saude.sksaude.exception.ConflictException;
+import com.saude.sksaude.exception.hadleException.BadRequestException;
+import com.saude.sksaude.exception.hadleException.ConflictException;
 import com.saude.sksaude.model.Patient;
+import com.saude.sksaude.repository.PatientCustomRepository;
 import com.saude.sksaude.repository.PatientRepository;
 import com.saude.sksaude.utils.DefaultValuePatient;
 import jakarta.validation.Valid;
@@ -16,12 +16,16 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 
 @RequiredArgsConstructor
 @Service
 public class PatientService {
     private final ModelMapper mapper = new ModelMapper();
 
+    private final PatientCustomRepository patientCustomRepository;
 
     private final PatientRepository patientRepository;
 
@@ -138,5 +142,9 @@ public class PatientService {
         }
 
         return existingPatient;
+    }
+
+    public List<Patient> getAllPatients(LocalDateTime birthDate, String name, String bloodType, String gender, String postalCode) {
+        return patientCustomRepository.findAllByFilters(name, bloodType, gender, postalCode);
     }
 }
