@@ -1,4 +1,4 @@
-package com.saude.sksaude.exception;
+package com.saude.sksaude.exception.hadleException;
 
 public class ConflictException extends RuntimeException{
     public ConflictException(String message) {
