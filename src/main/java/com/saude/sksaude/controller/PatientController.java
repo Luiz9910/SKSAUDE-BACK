@@ -55,14 +55,13 @@ public class PatientController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/patients/filter")
     public PatientListResponse getAllPatientFilter(
-            @RequestParam(required = false) LocalDateTime birthDate,
+            @RequestParam(required = false) LocalDateTime dtRegister,
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String bloodType,
             @RequestParam(required = false) String gender,
             @RequestParam(required = false) String postalCode) {
 
         return new PatientListResponse("Dados dos pacientes filtrados.",
-                this.patientService.getAllPatients(birthDate, name, bloodType, gender, postalCode));
+                this.patientService.getAllPatients(dtRegister, name, bloodType, gender, postalCode));
     }
-
 }

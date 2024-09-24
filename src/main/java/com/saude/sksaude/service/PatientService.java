@@ -38,6 +38,7 @@ public class PatientService {
         Patient patient = mapper.map(patientDTO, Patient.class);
         patient.setSnActive(DefaultValuePatient.snActive);
         patient = this.getLocalizationAPI(patient);
+        patient.setDtCreated(LocalDateTime.now());
 
         patientRepository.save(patient);
         return patient;
@@ -144,7 +145,7 @@ public class PatientService {
         return existingPatient;
     }
 
-    public List<Patient> getAllPatients(LocalDateTime birthDate, String name, String bloodType, String gender, String postalCode) {
-        return patientCustomRepository.findAllByFilters(name, bloodType, gender, postalCode);
+    public List<Patient> getAllPatients(LocalDateTime dtRegister, String name, String bloodType, String gender, String postalCode) {
+        return patientCustomRepository.findAllByFilters(dtRegister, name, bloodType, gender, postalCode);
     }
 }
