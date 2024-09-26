@@ -6,6 +6,7 @@ import com.saude.sksaude.dto.PatientDTO;
 import com.saude.sksaude.dto.PatientUpdateDTO;
 import com.saude.sksaude.exception.hadleException.BadRequestException;
 import com.saude.sksaude.exception.hadleException.ConflictException;
+import com.saude.sksaude.exception.hadleException.NotFoundException;
 import com.saude.sksaude.model.Patient;
 import com.saude.sksaude.repository.customer.PatientCustom;
 import com.saude.sksaude.repository.PatientRepository;
@@ -103,7 +104,7 @@ public class PatientService {
     public Patient findPatientByNrCpf(String nrCpf) {
         Patient patient = patientRepository.findPatientByNrCpf(nrCpf.replaceAll("[^0-9]", ""));
         if (patient == null) {
-            throw new ConflictException("Paciente não foi encontrado no sistema");
+            throw new NotFoundException("Paciente não foi encontrado no sistema");
         }
 
         return patient;
