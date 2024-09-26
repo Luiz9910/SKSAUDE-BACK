@@ -16,7 +16,7 @@ import java.util.List;
 @Repository
 public class PatientCustom {
     @PersistenceContext
-    private EntityManager entityManager;
+    EntityManager entityManager;
 
     public List<Patient> findAllByFilters(LocalDateTime dtRegister, String name, String bloodType, String gender, String postalCode) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
