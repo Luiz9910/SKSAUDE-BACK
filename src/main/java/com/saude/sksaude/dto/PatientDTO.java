@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PatientDTO {
+public class    PatientDTO {
     @NotBlank(message = "Nome do paciente precisa ser informado! Ex: Luiz")
     @Schema(description = "Patient's full name", example = "Luiz", required = true)
     private String nmPatient;
@@ -70,6 +70,7 @@ public class PatientDTO {
     public void toUpperCase() {
          nmPatient = nmPatient.toUpperCase();
          tpSex = tpSex.toUpperCase();
+         nrCpf = nrCpf.replaceAll("[^\\d]", "");;
          tpMaritalStatus = tpMaritalStatus.toUpperCase();
          tpSkinColor = tpSkinColor.toUpperCase();
          tpBlood = tpBlood.toUpperCase();

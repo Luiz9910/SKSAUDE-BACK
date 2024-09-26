@@ -10,4 +10,7 @@ import org.springframework.stereotype.Repository;
 public interface PatientRepository extends JpaRepository<Patient, Long> {
     @Query(nativeQuery = true, value = "SELECT NR_CPF FROM SKSAUDE.PACIENTE WHERE NR_CPF = ?")
     String findByNrCpf(@Param("nrCpf") String nrCpf);
+
+    @Query(nativeQuery = true, value = "SELECT * FROM SKSAUDE.PACIENTE WHERE NR_CPF = ?")
+    Patient findPatientByNrCpf(@Param("nrCpf") String nrCpf);
 }
