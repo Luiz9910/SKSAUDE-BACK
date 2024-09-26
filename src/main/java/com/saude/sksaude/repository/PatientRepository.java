@@ -6,10 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
-
 @Repository
 public interface PatientRepository extends JpaRepository<Patient, Long>  {
     @Query(nativeQuery = true, value = "SELECT nr_cpf FROM sksaude.paciente WHERE nr_cpf = ?")
