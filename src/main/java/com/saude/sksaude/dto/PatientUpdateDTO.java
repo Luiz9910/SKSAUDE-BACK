@@ -1,15 +1,8 @@
 package com.saude.sksaude.dto;
 
-import com.saude.sksaude.ValidatorAnnotation.birthDay.ValidBirthday;
-import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.LocalDateTime;
 

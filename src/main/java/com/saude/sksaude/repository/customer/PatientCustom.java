@@ -1,4 +1,4 @@
-package com.saude.sksaude.repository;
+package com.saude.sksaude.repository.customer;
 
 import com.saude.sksaude.model.Patient;
 import jakarta.persistence.EntityManager;
@@ -14,9 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class PatientCustomRepository {
+public class PatientCustom {
     @PersistenceContext
-    private EntityManager entityManager;
+    EntityManager entityManager;
 
     public List<Patient> findAllByFilters(LocalDateTime dtRegister, String name, String bloodType, String gender, String postalCode) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
