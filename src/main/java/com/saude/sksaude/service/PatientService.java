@@ -7,7 +7,7 @@ import com.saude.sksaude.dto.PatientUpdateDTO;
 import com.saude.sksaude.exception.hadleException.BadRequestException;
 import com.saude.sksaude.exception.hadleException.ConflictException;
 import com.saude.sksaude.model.Patient;
-import com.saude.sksaude.repository.PatientCustomRepository;
+import com.saude.sksaude.repository.customer.PatientCustom;
 import com.saude.sksaude.repository.PatientRepository;
 import com.saude.sksaude.utils.DefaultValuePatient;
 import jakarta.validation.Valid;
@@ -25,16 +25,24 @@ import java.util.List;
 public class PatientService {
     private final ModelMapper mapper = new ModelMapper();
 
-    private final PatientCustomRepository patientCustomRepository;
+    private final PatientCustom patientCustom;
 
     private final PatientRepository patientRepository;
 
     public Patient savePatient(PatientDTO patientDTO) {
+        patientDTO.toUpperCase();
         if (patientRepository.findByNrCpf(patientDTO.getNrCpf()) != null) {
             throw new ConflictException("Já existe esse paciente no sistema");
         }
 
-        patientDTO.toUpperCase();
+        if (patientRepository.findByEmail(patientDTO.getEmail()) != null) {
+            throw new ConflictException("Já existe um paciente com esse email");
+        }
+
+        if (patientRepository.findByNrPhone(patientDTO.getNrPhone()) != null) {
+            throw new ConflictException("Já existe um paciente com esse numero de celular");
+        }
+
         Patient patient = mapper.map(patientDTO, Patient.class);
         patient.setSnActive(DefaultValuePatient.snActive);
         patient = this.getLocalizationAPI(patient);
@@ -146,6 +154,6 @@ public class PatientService {
     }
 
     public List<Patient> getAllPatients(LocalDateTime dtRegister, String name, String bloodType, String gender, String postalCode) {
-        return patientCustomRepository.findAllByFilters(dtRegister, name, bloodType, gender, postalCode);
+        return patientCustom.findAllByFilters(dtRegister, name, bloodType, gender, postalCode);
     }
 }
