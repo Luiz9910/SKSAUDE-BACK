@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name ="MEDICO", schema = "SKSAUDE")
-public class Medico {
+public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_MEDICO")
     @SequenceGenerator(name = "SEQ_MEDICO", schema = "SKSAUDE", sequenceName = "SEQ_GENERATOR", allocationSize = 1)
@@ -27,7 +27,7 @@ public class Medico {
     private String crm;
 
     @Column(name = "cd_especialidade")
-    private Integer cdEspecialidade;
+    private Integer cdSpecialty;
 
     @Column(name = "sn_ativo")
     private String snActive;

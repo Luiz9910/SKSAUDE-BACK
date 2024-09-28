@@ -1,5 +1,5 @@
 package com.saude.sksaude.utils;
 
-public class DefaultValueMedico {
+public class DefaultValueDoctor {
     public static final String snActive = "S";
 }

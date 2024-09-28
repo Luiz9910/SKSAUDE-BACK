@@ -12,10 +12,10 @@ import org.hibernate.validator.constraints.br.CPF;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MedicoDTO {
+public class DoctorDTO {
     @NotBlank(message = "nome do médico precisa ser informado! Ex: Marcelo")
     @Schema(description = "nome completo do médio", example = "Marcelo", required = true)
-    private String nmMedico;
+    private String nmDoctor;
 
     @CPF
     @NotBlank(message = "Número do CPF precisa ser informado! Ex: 97002046004")
@@ -31,12 +31,12 @@ public class MedicoDTO {
 
     @NotNull(message = "Codigo da especialidade precisa ser informado")
     @Schema(description = "codigo da especialidade", example = "1", required = true)
-    private Integer cdEspecialidade;
+    private Integer cdSpecialty;
 
 
 
     public void toUpperCase() {
-        nmMedico = nmMedico.toUpperCase();
+        nmDoctor = nmDoctor.toUpperCase();
         crm = crm.toUpperCase();
 
     }

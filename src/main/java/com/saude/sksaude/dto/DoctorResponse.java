@@ -1,6 +1,6 @@
 package com.saude.sksaude.dto;
 
-import com.saude.sksaude.model.Medico;
+import com.saude.sksaude.model.Doctor;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MedicoResponse {
+public class DoctorResponse {
     private String message;
-    private Medico medico;
+    private Doctor doctor;
 }
