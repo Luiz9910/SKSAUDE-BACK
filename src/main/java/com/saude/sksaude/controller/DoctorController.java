@@ -61,5 +61,18 @@ public class DoctorController {
         return ResponseEntity.ok(response);
     }
 
+    @ResponseStatus(HttpStatus.OK)
+    @PatchMapping("action/")
+    public DoctorResponse actionDoctor(@RequestParam(name = "nrCpf") String nrCpf, @RequestParam("action") String action){
+        return new DoctorResponse("Ação para ativar ou inativar o paciente foi realizada com sucesso.",
+                this.doctorService.actionDoctor(nrCpf, action));
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @PutMapping("{nrCpf}")
+    public DoctorResponse updateDoctor(@PathVariable(value = "nrCpf") String nrCpf, @RequestBody @Valid DoctorUpdateDTO doctorUpdateDTO) {
+        return new DoctorResponse("Dados do paciente atualizado com suceso.",
+                this.doctorService.updateDoctor(nrCpf, doctorUpdateDTO));
+    }
 
 }
