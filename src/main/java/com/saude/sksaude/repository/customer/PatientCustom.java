@@ -45,6 +45,8 @@ public class PatientCustom {
             predicates.add(cb.equal(patient.get("nrCep"), postalCode));
         }
 
+        predicates.add(cb.equal(patient.get("snActive"), "S"));
+
         query.where(predicates.toArray(new Predicate[0]));
         query.select(patient);
         return entityManager.createQuery(query).getResultList();
