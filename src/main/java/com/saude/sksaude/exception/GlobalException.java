@@ -1,5 +1,8 @@
 package com.saude.sksaude.exception;
 
+import com.saude.sksaude.exception.hadleException.BadRequestException;
+import com.saude.sksaude.exception.hadleException.ConflictException;
+import com.saude.sksaude.exception.hadleException.NotFoundException;
 import com.saude.sksaude.exception.message.ApiErrorMessage;
 import com.saude.sksaude.exception.message.ApiErrorMessages;
 import jakarta.servlet.http.HttpServletRequest;

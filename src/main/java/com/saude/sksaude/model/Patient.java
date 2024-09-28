@@ -61,6 +61,9 @@ public class Patient {
     @Column(name = "TP_SANGUINEO")
     private String tpBlood;
 
+    @Column(name = "DT_CREATED")
+    private LocalDateTime dtCreated;
+
     @Column(name = "SN_ATIVO")
     private String snActive;
 }
