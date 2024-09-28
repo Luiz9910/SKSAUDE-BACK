@@ -6,6 +6,7 @@ import com.saude.sksaude.dto.PatientDTO;
 import com.saude.sksaude.dto.PatientUpdateDTO;
 import com.saude.sksaude.exception.hadleException.BadRequestException;
 import com.saude.sksaude.exception.hadleException.ConflictException;
+import com.saude.sksaude.exception.hadleException.BadGatewayException;
 import com.saude.sksaude.exception.hadleException.NotFoundException;
 import com.saude.sksaude.model.Patient;
 import com.saude.sksaude.repository.customer.PatientCustom;
@@ -66,7 +67,7 @@ public class PatientService {
 
             return patient;
         } catch (Exception e) {
-            return null;
+            throw new BadGatewayException("Não conseguimos ter uma resposta do seu endereço através desse cep");
         }
     }
 
@@ -94,10 +95,12 @@ public class PatientService {
         return patientRepository.save(patient);
     }
 
-    public Patient updatePatient(String nrCpf, @Valid PatientUpdateDTO patientUpdateDTO) {
+    public Patient updatePatient(String nrCpf, PatientUpdateDTO patientUpdateDTO) {
         Patient existingPatient = this.findPatientByNrCpf(nrCpf);
         patientUpdateDTO.toUpperCase();
         existingPatient = this.setPatientUpdate(patientUpdateDTO, existingPatient);
+        existingPatient = this.getLocalizationAPI(existingPatient);
+
         return patientRepository.save(existingPatient);
     }
 

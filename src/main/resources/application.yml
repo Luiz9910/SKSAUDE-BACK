@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/sksaude
-    username: postgres
-    password: Luiz1992@
+    url: jdbc:postgresql://db-postgresql-nyc3-05932-do-user-17893251-0.h.db.ondigitalocean.com:25060/sksaude
+    username: doadmin
+    password: AVNS_FMkvA0hJPwrz_06ZPGp
   jpa:
     hibernate:
       ddl-auto: update
