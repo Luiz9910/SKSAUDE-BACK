@@ -17,5 +17,5 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
     Doctor findDoctorByNrCpf(@Param("nrCpf") String nrCpf);
 
     @Query(nativeQuery = true, value = "SELECT cd_especialidade FROM SKSAUDE.ESPECIALIDADE WHERE cd_especialidade = ?")
-    List<Doctor> findByCdSpecialty(@Param("cdEspecialidade") Integer cdEspecialidade);
+    Long findByCdSpecialty(@Param("cdSpecialty") Integer cdSpeciality);
 }

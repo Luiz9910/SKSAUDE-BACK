@@ -33,11 +33,9 @@ public class DoctorDTO {
     @Schema(description = "codigo da especialidade", example = "1", required = true)
     private Integer cdSpecialty;
 
-
-
     public void toUpperCase() {
         nmDoctor = nmDoctor.toUpperCase();
-        crm = crm.toUpperCase();
-
+        crm = crm.toUpperCase().replaceAll("[^\\d]", "");
+        nrCpf = nrCpf.replaceAll("[^\\d]", "");
     }
 }

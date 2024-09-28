@@ -2,6 +2,7 @@ package com.saude.sksaude.exception;
 
 import com.saude.sksaude.exception.hadleException.BadRequestException;
 import com.saude.sksaude.exception.hadleException.ConflictException;
+import com.saude.sksaude.exception.hadleException.NoContentException;
 import com.saude.sksaude.exception.hadleException.NotFoundException;
 import com.saude.sksaude.exception.message.ApiErrorMessage;
 import com.saude.sksaude.exception.message.ApiErrorMessages;
@@ -56,5 +57,12 @@ public class GlobalException {
     public ApiErrorMessage handleConflictException(ConflictException e, HttpServletRequest request) {
         String messageError = e.getMessage();
         return new ApiErrorMessage(Instant.now(), "Ocorreu um erro", messageError, request.getRequestURI());
+    }
+
+    @ExceptionHandler(NoContentException.class)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public ApiErrorMessage handleNoContentException(NoContentException e, HttpServletRequest request) {
+        String messageError = e.getMessage();
+        return new ApiErrorMessage(Instant.now(), "Nenhum conteúdo disponível", messageError, request.getRequestURI());
     }
 }

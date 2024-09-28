@@ -15,10 +15,10 @@ public class Doctor {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_MEDICO")
     @SequenceGenerator(name = "SEQ_MEDICO", schema = "SKSAUDE", sequenceName = "SEQ_GENERATOR", allocationSize = 1)
     @Column(name = "cd_medico")
-    private Long cdMedico;
+    private Long cdDoctor;
 
     @Column(name = "nm_medico")
-    private String nmMedico;
+    private String nmDoctor;
 
     @Column(name = "nr_cpf")
     private String nrCpf;
