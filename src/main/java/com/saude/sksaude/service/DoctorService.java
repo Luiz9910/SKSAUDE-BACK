@@ -36,6 +36,7 @@ public class DoctorService {
     private final DoctorCustom doctorCustom;
 
     public Doctor saveDoctor(DoctorDTO doctorDTO){
+        doctorDTO.toUpperCase();
         if (doctorRepository.findByNrCpf(doctorDTO.getNrCpf()) != null) {
             throw new ConflictException("Já existe esse medico no sistema");
         }
@@ -44,7 +45,6 @@ public class DoctorService {
             throw new ConflictException("Especialidade não encontrada");
         }
 
-        doctorDTO.toUpperCase();
         Doctor doctor = mapper.map(doctorDTO, Doctor.class);
         doctor.setSnActive(DefaultValueDoctor.snActive);
 
@@ -86,6 +86,10 @@ public class DoctorService {
 
         Doctor doctor = doctorRepository.findDoctorByNrCpf(nrCpf);
 
+        if (doctor == null) {
+            throw new NotFoundException("CPF do doutor não encontrado");
+        }
+
         if (action.trim().equals(doctor.getSnActive())) {
             throw new ConflictException("O médico está " + doctor.getSnActive() + " no sistema. Altere a ação (S ou N) para a gente trocar no sistema");
         }
@@ -94,9 +98,15 @@ public class DoctorService {
         return doctorRepository.save(doctor);
     }
 
-    public Doctor updateDoctor(String nrCpf, @Valid DoctorUpdateDTO doctorUpdateDTO) {
-        Doctor existingDoctor = doctorRepository.findDoctorByNrCpf(nrCpf);
+    public Doctor updateDoctor(String nrCpf, DoctorUpdateDTO doctorUpdateDTO) {
+        nrCpf = nrCpf.replaceAll("[^\\d]", "");
         doctorUpdateDTO.toUpperCase();
+        Doctor existingDoctor = doctorRepository.findDoctorByNrCpf(nrCpf);
+
+        if (existingDoctor == null) {
+            throw new NotFoundException("CPF do doutor não encontrado");
+        }
+
         existingDoctor = this.setDoctorUpdate(doctorUpdateDTO, existingDoctor);
         return doctorRepository.save(existingDoctor);
     }

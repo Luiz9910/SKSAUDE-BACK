@@ -35,7 +35,7 @@ public class DoctorDTO {
 
     public void toUpperCase() {
         nmDoctor = nmDoctor.toUpperCase();
-        crm = crm.toUpperCase().replaceAll("[^\\d]", "");
+        crm = crm.toUpperCase();
         nrCpf = nrCpf.replaceAll("[^\\d]", "");
     }
 }
