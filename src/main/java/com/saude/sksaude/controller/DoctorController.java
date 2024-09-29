@@ -36,7 +36,7 @@ public class DoctorController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("doctor/filter")
+    @GetMapping("doctors/filter")
     public DoctorListResponse getAllDoctorFilter(
             @RequestParam(required = false) String nmDoctor,
             @RequestParam(required = false) Integer cdSpecialty) {
@@ -46,19 +46,10 @@ public class DoctorController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/all")
-    public ResponseEntity<DoctorListResponse> getAllDoctors() {
-        ResponseEntity<List<Doctor>> doctorResponse = this.doctorService.getAllDoctors();
-
-        if (doctorResponse.getStatusCode() == HttpStatus.NO_CONTENT) {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT)
-                    .body(new DoctorListResponse("Nenhum médico encontrado", null));
-        }
-
-        List<Doctor> doctors = doctorResponse.getBody();
-        DoctorListResponse response = new DoctorListResponse("Segue a lista de médicos", doctors);
-
-        return ResponseEntity.ok(response);
+    @GetMapping("doctors")
+    public DoctorListResponse getAllDoctors() {
+        return new DoctorListResponse("Todos os médiocs:",
+                this.doctorService.getAllDoctors());
     }
 
     @ResponseStatus(HttpStatus.OK)

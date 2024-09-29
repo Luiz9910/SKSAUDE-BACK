@@ -61,16 +61,22 @@ public class DoctorService {
     }
 
     public List<Doctor> getAllDoctorFilter(String nmDoctor, Integer cdSpecialty){
-        return doctorCustom.findAllDoctorByFilter(nmDoctor.toUpperCase(), cdSpecialty);
+        if (nmDoctor == null && cdSpecialty == null) {
+            throw new BadRequestException("Parâmetros 'nmDoctor' e 'cdSpecialty' pelo menos um é obrigatorio");
+        }
+
+        return doctorCustom.findAllDoctorByFilter(nmDoctor, cdSpecialty);
+
+
     }
 
-    public ResponseEntity<List<Doctor>> getAllDoctors(){
+    public List<Doctor> getAllDoctors(){
         List<Doctor> doctorList = doctorRepository.findAll();
 
         if (doctorList.isEmpty()){
             throw new NoContentException("Nenhum médico encontrado.");
         }
-        return ResponseEntity.ok(doctorList);
+        return doctorList;
     }
 
     public Doctor actionDoctor(String nrCpf, String action){
