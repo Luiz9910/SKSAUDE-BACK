@@ -5,7 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+
 
 @Data
 @AllArgsConstructor
@@ -17,7 +19,7 @@ public class Consultation {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_CONSULTA" )
     @SequenceGenerator(name = "SEQ_CONSULTA", schema = "SKSAUDE",sequenceName = "SEQ_CONSULTA", allocationSize = 1)
     @Column(name = "CD_CONSULTA")
-    private Long cdConsult;
+    private Long cdConsult; 
 
     @Column(name = "DS_CONSULTA")
     private String dsConsultation;
@@ -26,23 +28,16 @@ public class Consultation {
     private LocalDateTime dtConsultation;
 
     @Column(name = "CD_ESPECIALIDADE")
-    private String cdSpecialty;
+    private Long cdSpecialty;
 
     @Column(name = "CD_PACIENTE")
-    private String cdPatient;
+    private Long cdPatient;
 
     @Column(name = "CD_MEDICO")
-    private String cdDoctor;
+    private Long cdDoctor;
 
     @Column(name = "SN_ATIVO")
     private String snActive;
-
-
-
-
-
-
-
 
 
 }

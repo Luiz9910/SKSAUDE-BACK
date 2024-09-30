@@ -6,11 +6,25 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+
 @Repository
 public interface ConsultationRepository extends JpaRepository<Consultation, Long> {
 
-    @Query(nativeQuery = true, value = "SELECT cd_Paciente FROM sksaude.consulta  WHERE  cd_Paciente = ?")
-    String findByCdPaciente(@Param( "cdPatient" ) String cdPatient );
+    @Query(nativeQuery = true, value = "SELECT CD_PACIENTE FROM SKSAUDE.CONSULTA WHERE cd_paciente = ?")
+    Long findByCdPatient(@Param("cdPatient")Long cdPatient);
 
-    @Query(nativeQuery = true, value = "SELECT * FROM sksaude.consulta WHERE dt_consulta")
+    @Query(nativeQuery = true, value = "SELECT CD_ESPECIALIDADE FROM SKSAUDE.CONSULTA WHERE cd_especialidade = ?")
+    Long findByCdSpecialty(@Param("cdSpecialty") Long cdSpeciality);
+
+    @Query(nativeQuery = true, value = "SELECT CD_MEDICO FROM SKSAUDE.CONSULTA WHERE cd_medico = ?")
+    Long findCdDoctor(@Param("cdDoctor") Long cdDoctor);
+
+
 }
+
+
+
+
