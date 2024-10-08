@@ -19,27 +19,26 @@ public class ConsultationCustomRepository {
     @PersistenceContext
     EntityManager entityManager;
 
-    public List<Consultation> findAllConsultationsByFilters ( long cdSpecialty) {
+    public List<Consultation> findAllConsultationsByFilters ( Long cdSpecialty, LocalDateTime dtConsultation) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Consultation> query = cb.createQuery(Consultation.class);
-        Root<Consultation> consultation = query.from(Consultation.class);
+        Root<Consultation> consulta = query.from(Consultation.class);
 
         List<Predicate> predicates = new ArrayList<>();
 
 
-        predicates.add(cb.equal(consultation.get("snActive"), "S"));
+        if (cdSpecialty != null) {
+            predicates.add(cb.equal(consulta.get("cdSpecialty"), cdSpecialty));
+        }
+
+        if (dtConsultation != null) {
+            predicates.add(cb.between(consulta.get("dtConsultation"), dtConsultation, LocalDateTime.now()));
+        }
+
+        predicates.add(cb.equal(consulta.get("snActive"), "S"));
 
         query.where(predicates.toArray(new Predicate[0]));
-        query.select(consultation);
+        query.select(consulta);
         return entityManager.createQuery(query).getResultList();
-
-
-
-
-
-
     }
-
-
-
 }

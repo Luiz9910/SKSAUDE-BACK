@@ -11,7 +11,4 @@ import lombok.NoArgsConstructor;
 public class ConsultationResponse {
     private String message;
     private Consultation consultation;
-
-
-
 }

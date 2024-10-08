@@ -23,7 +23,7 @@ public class ConsultationDTO {
     private LocalDateTime dtConsultation;
 
     @NotNull(message = "Especialidade do medico precisa ser informada! Ex: 1")
-    @Schema(description = "The doctor's specialty must be provided", example = "1",required = true)
+    @Schema(description = "The doctor's specialty must be provided", example = "1", required = true)
     private Long cdSpecialty;
 
     @NotNull(message = "Codigo do paciente deve ser informado! Ex:557-29-5318")
@@ -33,8 +33,6 @@ public class ConsultationDTO {
     @NotNull(message = "Codigo do medico deve ser informado! Ex:558-28-5333")
     @Schema(description = "The docter code must be provided", example = "558-28-5333", required = true)
     private Long cdDoctor;
-
-
 
     public void toUpperCase() {
         dsConsultation = this.dsConsultation.toUpperCase();

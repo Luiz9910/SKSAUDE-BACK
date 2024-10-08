@@ -4,7 +4,6 @@ import com.saude.sksaude.dto.PatientDTO;
 import com.saude.sksaude.dto.PatientListResponse;
 import com.saude.sksaude.dto.PatientResponse;
 import com.saude.sksaude.dto.PatientUpdateDTO;
-import com.saude.sksaude.model.Patient;
 import com.saude.sksaude.service.PatientService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -13,8 +12,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
 
 @Validated
 @RequiredArgsConstructor
