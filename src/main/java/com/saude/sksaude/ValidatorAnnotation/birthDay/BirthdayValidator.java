@@ -22,5 +22,4 @@ public class BirthdayValidator implements ConstraintValidator<ValidBirthday, Loc
 
         return !value.isBefore(minDate) && !value.isAfter(now);
     }
-
 }
